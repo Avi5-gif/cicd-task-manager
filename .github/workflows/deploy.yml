@@ -33,7 +33,7 @@ jobs:
         run: cd backend && npm test
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          MONGO_URI_TEST: mongodb://localhost:27017/test_db
+          MONGO_URI: mongodb://localhost:27017/test_db
 
   build-push:
     runs-on: ubuntu-latest
