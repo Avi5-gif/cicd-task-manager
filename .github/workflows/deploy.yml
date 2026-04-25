@@ -33,7 +33,7 @@ jobs:
         run: cd backend && npm test
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          MONGO_URI_TEST: mongodb://localhost:27017/test_db
+          MONGODB_URI: mongodb://localhost:27017/test_db
 
   build-push:
     runs-on: ubuntu-latest
@@ -79,8 +79,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ~/task-manager
-            echo "MONGO_URI=mongodb://task-mongodb:27017/taskmanager" > .env
+            echo "MONGODB_URI=mongodb://task-mongodb:27017/taskmanager" > .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+            echo "DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}" >> .env
             echo "NODE_ENV=production" >> .env
             docker compose pull
             docker compose down
